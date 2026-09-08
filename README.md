@@ -57,8 +57,17 @@ tags inside a `.badge-list`.
 
 ## Printing
 
-The page has a dedicated print stylesheet — `Cmd/Ctrl+P` gives a clean two-page
-A4/Letter PDF with the "Download CV" button and other screen-only chrome removed.
+The page has a dedicated print stylesheet, so `Cmd/Ctrl+P` gives a clean
+three-page A4 PDF. Two things it does that matter:
+
+- **Floats, not flex.** A flex container will not fragment across printed pages
+  in Chrome, so it jumps whole to the next page and leaves page one empty.
+- **`break-inside: avoid` on items only, never on sections.** A section is
+  taller than a page, so asking it not to break forces a break before it and
+  then overflows anyway.
+
+Projects marked `print-brief` drop their bullets in print and render their stack
+as inline text rather than pills; the web page keeps everything.
 
 ## Deploying
 
@@ -66,14 +75,22 @@ Any static host works, since there is nothing to build.
 
 **GitHub Pages**
 
+Already set up and live at **https://asimashfaq.github.io**. To update:
+
 ```bash
-git init && git add . && git commit -m "CV site"
-git branch -M main
-git remote add origin git@github.com:asimashfaq/asimashfaq.github.io.git
-git push -u origin main
+git add -A && git commit -m "..." && git push
 ```
 
-Then Settings → Pages → Source: `main` / root. Lands at `asimashfaq.github.io`.
+Pages rebuilds in under a minute.
+
+**Regenerate the PDF after editing** (it is committed, not built on the fly):
+
+```bash
+python3 -m http.server 8000 &
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+  --no-pdf-header-footer --print-to-pdf=assets/files/asim-ashfaq-resume.pdf \
+  http://localhost:8000/index.html
+```
 
 **Netlify / Vercel / Cloudflare Pages** — drag the folder in, or point it at the
 repo. Build command: none. Publish directory: `/`.
