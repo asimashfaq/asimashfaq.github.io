@@ -97,11 +97,15 @@
             independent information systems audit.
           </p>
           <p class="item-desc">
-            The harder half of the building is compliance, not code. Our consumer application
-            went through repeated App Store and Play review cycles under the named
-            cryptocurrency, exchange and financial-trading guidelines, and is live on both
-            stores. The question was rarely whether the code ran. It was whether an activity
-            fell inside a licensing perimeter, and whether we could show where the line sat.
+            The harder half of the building is compliance, not code. Everything we issue goes
+            out under Regulation S, so I built the eligibility path behind it: a server-side
+            non-US-person determination under Rule 902(k), versioned, evidenced, and written
+            to a tamper-evident ledger before the decision is stored, with treaty withholding
+            resolved server-side rather than accepted from the client. Our consumer
+            application went through repeated App Store and Play review cycles under the
+            named cryptocurrency, exchange and financial-trading guidelines, and is live on
+            both stores. The question was rarely whether the code ran. It was whether an
+            activity fell inside a perimeter, and whether we could show where the line sat.
           </p>
           <p class="item-desc">
             The systems underneath are mine to the code: a NestJS backend of some fifty domain
@@ -158,6 +162,8 @@
               <li>Moved long-running, externally-settled operations onto Temporal, so cross-chain bridge steps, unfilled limit orders and transactions needing fee bumps survive restarts instead of being lost mid-flight.</li>
               <li>Built authentication around passkeys and OPAQUE rather than transmitted passwords, with Casbin policy for authorisation and TOTP as a second factor.</li>
               <li>Built the React dApp on wagmi/viem (trading, portfolio, lending and a pro order ticket) with a swap router that reports real price impact rather than an unmeasured zero.</li>
+              <li>Built the investor-eligibility path for a Regulation S offering: a server-side non-US-person determination under Rule 902(k) that records which input decided it and at what assurance level, because a self-declared nationality is weaker evidence than a verified identity and the audit basis has to say so. Every determination is anchored to a tamper-evident ledger before the row is persisted, so no decision can exist without its trail.</li>
+              <li>Resolved US withholding server-side instead of trusting the client with it: a W-8BEN treaty resolver covering thirty jurisdictions that derives the article and the rate from the investor's treaty country, the income type and the issuing entity's tax election, checked against IRS Table 1, Publication 515 and IRC section 897, with REIT ownership thresholds handled per treaty.</li>
               <li>Shipped the React Native mobile app on both iOS and Android, from passkey sign-up and KYC through fiat on-ramp, trading and rent claims, and took it through App Store and Play review.</li>
               <li>Started DeFiLoops, the platform's agentic execution layer: a Go stack on durable workflows that turns a strategy described in one sentence into a numbered plan, approved once and then run unattended across networks.</li>
               <li>Designed its key model to hold on-chain rather than by policy: the agent signs typed adapter parameters with no field for a destination or raw calldata, is capped by a spend limit it cannot raise, and is revocable across a whole chain in one transaction. An MCP server exposes plan authoring to a language model, with the money-spending tools withheld at the server rather than by convention.</li>
@@ -175,6 +181,8 @@
               <span class="badge">Solidity</span>
               <span class="badge">MCP</span>
               <span class="badge">React Native</span>
+              <span class="badge">Regulation S</span>
+              <span class="badge">W-8BEN</span>
             </div>
           </div>
 
@@ -774,6 +782,8 @@
               <li>Cross-chain bridging (CCTP)</li>
               <li>RWA tokenisation</li>
               <li>Proof of reserve</li>
+              <li>Regulation S / Rule 902(k)</li>
+              <li>W-8BEN treaty withholding</li>
             </ul>
           </div>
 
