@@ -57,17 +57,25 @@ tags inside a `.badge-list`.
 
 ## Printing
 
-The page has a dedicated print stylesheet, so `Cmd/Ctrl+P` gives a clean
-three-page A4 PDF. Two things it does that matter:
+`Cmd/Ctrl+P` gives a four-page A4 PDF. The print stylesheet is a separate
+design, not a squeezed copy of the page, and four decisions carry it:
 
-- **Floats, not flex.** A flex container will not fragment across printed pages
-  in Chrome, so it jumps whole to the next page and leaves page one empty.
-- **`break-inside: avoid` on items only, never on sections.** A section is
-  taller than a page, so asking it not to break forces a break before it and
-  then overflows anyway.
+- **One column.** The web page is 75/25. In print that fails twice over: Chrome
+  will not fragment a flex container across pages (it moves the whole thing to
+  the next page, leaving page one empty), and floats fragment but place the
+  second column after the first is laid out, so a tall main column pushes the
+  aside to page two. One column at full measure also means most bullets cost one
+  line instead of two.
+- **`break-inside: avoid` on small blocks only.** A section is taller than a
+  page, so telling a section not to break forces a break *before* it and
+  overflows anyway. Long entries flow across the boundary with `orphans`/`widows`
+  holding the shape; only short entries stay whole.
+- **Stack tags as text, not pills.** A page of green lozenges reads as
+  decoration. The same words at 9.5px read as data.
+- **Skills as label plus run.** Eight stacked lists become eight lines.
 
-Projects marked `print-brief` drop their bullets in print and render their stack
-as inline text rather than pills; the web page keeps everything.
+Projects marked `print-brief` drop their prose in print and keep name and stack;
+the web page keeps everything.
 
 ## Deploying
 

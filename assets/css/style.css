@@ -351,9 +351,25 @@ hr.divider {
    -------------------------------------------------------------------------- */
 
 @media print {
-  @page { size: A4; margin: 10mm 12mm; }
 
-  body { background: #fff; font-size: 11px; }
+  /* The printed CV is a single column at full page width.
+     Two reasons, both learned the hard way:
+       - Chrome will not fragment a flex container across printed pages. It
+         moves the whole container to the next page, leaving page one empty.
+       - Floats fragment, but the second column is placed after the first has
+         been laid out, so a main column taller than a page pushes the aside
+         to page two and leaves a third of page one blank.
+     One column sidesteps both, and a full-width measure means each bullet
+     costs one line instead of two. */
+
+  @page { size: A4; margin: 14mm 15mm; }
+
+  body {
+    background: #fff;
+    font-size: 10px;
+    line-height: 1.5;
+    color: #3d3d3d;
+  }
 
   .resume-wrapper {
     max-width: none;
@@ -365,91 +381,136 @@ hr.divider {
 
   .no-print { display: none !important; }
 
-  /* The print viewport is narrower than the 992px breakpoint, so the two-column
-     layout has to be restated here or the whole CV stacks into one long column. */
-  /* Floats, not flex. A flex container will not fragment across printed pages in
-     Chrome: it jumps whole to the next page, which left page one holding nothing
-     but the header. Floated columns break across pages properly. */
   .row { display: block; margin: 0; }
-  .row::after { content: ""; display: table; clear: both; }
-  .col-main  { float: left;  width: 70%; max-width: none; padding: 0 20px 0 0; }
-  .col-aside { float: right; width: 30%; max-width: none; padding: 0; }
-
-  .work-section { padding: .4rem 0; }
-  .section-heading { margin-bottom: .6rem; }
-  .item { margin-bottom: .7rem; }
-  .item-list li, .plain-list li { margin-bottom: .15rem; }
-  .stacked-list li { margin-bottom: .5rem; }
-  .skills-group { margin-bottom: .6rem; }
-  .aside-section { margin-bottom: .9rem; }
-  .badge-list { gap: .25rem; margin-top: .35rem; }
-  hr.divider { margin: .25rem 0; }
-  .resume-footer { margin-top: 0; break-before: avoid; page-break-before: avoid; }
-  .social-list { font-size: 9px; gap: .2rem .9rem; }
-  .credit { margin-top: .25rem; font-size: 8px; }
-  .item { margin-bottom: .38rem; }
-  .item-list li, .plain-list li, .stacked-list li { line-height: 1.35; }
-
-  .name { font-size: 30px; }
-  .tagline { font-size: 14px; }
-  .section-heading { font-size: 14px; }
-  .item-title { font-size: 13px; }
-  .item-list li, .plain-list li, .stacked-list li { font-size: 10px; }
-
-  .badge {
-    color: var(--accent) !important;
-    background: transparent !important;
-    border: 1px solid var(--accent);
-    padding: .15rem .35rem;
-  }
-
-  /* The web page carries the full detail; the printed CV is a summary, so the
-     secondary projects keep their title, description and stack and drop the
-     bullets. Aiming at four pages, not at saying everything twice. */
-  .print-brief .item-list,
-  .print-brief .item-desc { display: none; }
-
-  /* A brief entry is a name and a stack. Rendering that stack as chunky pills
-     costs two wrapped rows per project; as dense inline text it costs one. */
-  .print-brief .badge-list { display: block; margin-top: .1rem; }
-  .print-brief .badge {
-    display: inline;
+  .col-main, .col-aside {
+    float: none;
+    width: 100%;
+    max-width: none;
     padding: 0;
-    font-size: 8.5px;
-    font-weight: 400;
-    color: var(--muted);
-    background: transparent !important;
-    border: 0 !important;
   }
-  .print-brief .badge:not(:last-child)::after { content: " \00B7 "; }
 
-  /* The last block is a list of small things; inline it so four lines become two. */
-  .print-inline .item-meta { display: none; }
-  .print-inline .item-heading { margin-bottom: .1rem; }
-  .print-inline .item-list li { display: inline; margin: 0; padding: 0; }
-  .print-inline .item-list li::before { display: none; }
-  .print-inline .item-list li:not(:last-child)::after { content: " \00B7 "; color: var(--muted); }
+  /* ---- header ---- */
 
-  .item-desc { font-size: 9.5px; margin-bottom: .22rem; line-height: 1.4; }
-  .item-list li, .plain-list li, .stacked-list li { font-size: 9px; line-height: 1.35; margin-bottom: .06rem; }
-  .badge { font-size: 8px; padding: .12rem .3rem; }
-  .badge-list { gap: .2rem; margin-top: .25rem; }
-  .item { margin-bottom: .45rem; }
-  .work-section { padding: .25rem 0; }
-  .section-heading { margin-bottom: .35rem; font-size: 13px; }
-  .skills-group { margin-bottom: .45rem; }
-  .aside-section { margin-bottom: .7rem; }
-  .stacked-list li { margin-bottom: .35rem; }
-  .item-heading { margin-bottom: .25rem; }
-  .item-title { font-size: 12px; }
-  .item-meta { font-size: 9.5px; }
-  .quote { font-size: 10px; }
+  .name { font-size: 27px; letter-spacing: .28em; line-height: 1.15; }
+  .tagline { font-size: 11.5px; margin-top: .2rem; }
+  /* One horizontal run, not a four-line stack: the header is the same
+     information in a quarter of the height. */
+  .contact-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .15rem 1.1rem;
+    margin-top: .45rem;
+    font-size: 10px;
+  }
+  .contact-list li { margin-bottom: 0; }
 
-  /* Only the small blocks avoid breaking. A whole section is taller than a page,
-     so asking it not to break forces a break BEFORE it and then overflows anyway,
-     which is what left one page holding nothing but the header. */
-  .item, .aside-section, .skills-group { break-inside: avoid; page-break-inside: avoid; }
+  hr.divider { margin: .7rem 0; }
+
+  /* ---- sections ---- */
+
+  .work-section { padding: .5rem 0 0; }
+  .aside-section { margin: .9rem 0 0; }
+
+  .section-heading {
+    margin-bottom: .55rem;
+    padding-left: 9px;
+    font-size: 12px;
+    letter-spacing: .18em;
+  }
+  .section-heading::before { width: 3px; }
   .section-heading { break-after: avoid; page-break-after: avoid; }
 
-  a { color: var(--text); text-decoration: none; }
+  /* ---- entries ---- */
+
+  /* Long entries flow across a page boundary rather than jumping whole and
+     leaving a third of the previous page blank. The heading stays with its
+     first lines, and orphans/widows stop a single line stranding. */
+  .item { margin-bottom: .85rem; orphans: 3; widows: 3; }
+  .item-heading { break-after: avoid; page-break-after: avoid; }
+  .item-desc { orphans: 2; widows: 2; }
+  .item-heading { margin-bottom: .2rem; }
+  .item-title { font-size: 11.5px; line-height: 1.25; }
+  .item-meta { font-size: 9.5px; }
+  .item-desc { font-size: 10px; line-height: 1.5; margin-bottom: .35rem; }
+
+  .item-list li {
+    font-size: 10px;
+    line-height: 1.5;
+    margin-bottom: .18rem;
+    padding-left: 11px;
+  }
+  .item-list li::before { width: 3px; height: 3px; top: .55em; }
+
+  /* ---- stack tags: quiet text, not pills. A page of green lozenges reads as
+         decoration; the same words in small caps-height text read as data. ---- */
+
+  /* The stack line belongs with the entry above it, never stranded at the top
+     of the next page. */
+  .badge-list { display: block; margin-top: .3rem; break-before: avoid; page-break-before: avoid; }
+  .badge {
+    display: inline;
+    padding: 0;
+    font-size: 9.5px;
+    font-weight: 400;
+    color: var(--accent-dark);
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0;
+  }
+  .badge:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
+
+  /* Secondary projects keep their name and stack, and drop the prose. */
+  .print-brief .item-list,
+  .print-brief .item-desc { display: none; }
+  .print-brief { margin-bottom: .5rem; break-inside: avoid; page-break-inside: avoid; }
+
+  .print-inline .item-meta { display: none; }
+  .print-inline .item-list li { display: inline; margin: 0; padding: 0; }
+  .print-inline .item-list li::before { display: none; }
+  .print-inline .item-list li:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
+
+  /* ---- skills: a label and a run, rather than eight stacked lists ---- */
+
+  .skills-group {
+    display: flex;
+    gap: .6rem;
+    margin-bottom: .3rem;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .skills-subheading {
+    flex: 0 0 95px;
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .skills-group .plain-list { flex: 1 1 auto; }
+  .skills-group .plain-list li {
+    display: inline;
+    font-size: 10px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .skills-group .plain-list li:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
+
+  /* ---- education / volunteering: three across instead of one deep ---- */
+
+  .stacked-list { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; }
+  .stacked-list li { flex: 1 1 28%; margin-bottom: 0; font-size: 9.5px; }
+  .stacked-list .primary { font-size: 10px; }
+
+  /* Languages is two short items; one line, not a stack under a big heading. */
+  .aside-section > .plain-list li { display: inline; font-size: 10px; }
+  .aside-section > .plain-list li:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
+
+  .quote { font-size: 10px; padding-left: .6rem; }
+
+  /* ---- footer ---- */
+
+  .resume-footer { break-before: avoid; page-break-before: avoid; }
+  .social-list { font-size: 9.5px; gap: .3rem 1.4rem; }
+  .credit { margin-top: .45rem; font-size: 8.5px; }
+
+  a { color: inherit; text-decoration: none; }
+  .item-title a, .item-desc a { color: var(--accent-dark); }
 }
