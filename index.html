@@ -145,7 +145,7 @@
               <li>Founded and built the engineering side of a real-world-asset tokenisation platform for tokenised property and equities, live on Base with Arbitrum in rollout.</li>
               <li>Built the compliance path for a Regulation S offering: a server-side non-US-person determination under Rule 902(k), versioned and evidenced, anchored to a tamper-evident ledger before the decision is stored, with W-8BEN treaty withholding resolved across thirty jurisdictions server-side rather than taken from the client.</li>
               <li>Wrote and maintain the NestJS backend, roughly fifty domain modules from KYC and AML through orders, settlement, holdings, rewards and fiat rails, with anything that settles outside a request moved onto Temporal so bridge legs and resting orders survive a restart.</li>
-              <li>Designed the zero-trust infrastructure: SPIFFE/SPIRE identity issuing mTLS to every service, Vault for secrets and signing keys, Falco for runtime detection, immudb as the audit ledger, and authentication on passkeys and OPAQUE rather than transmitted passwords.</li>
+              <li>Designed the zero-trust infrastructure: SPIFFE/SPIRE identity and mTLS between services, Vault for secrets and signing keys, Falco runtime detection, immudb as the audit ledger, a self-hosted Headscale mesh carrying the private surfaces instead of the public internet, and authentication on passkeys and OPAQUE rather than transmitted passwords.</li>
               <li>Shipped both clients: a React dApp on wagmi/viem, and a React Native app on iOS and Android taken through App Store and Play review, covering passkey sign-up and KYC through fiat on-ramp, trading and rent claims.</li>
               <li>Started DeFiLoops, the platform's agentic execution layer: a Go stack on durable workflows where an MCP server lets a language model author and run strategies under an agent key that is spend-capped, revocable across a chain in one transaction, and has no field for a destination or raw calldata.</li>
               <li>Run the delivery loop end to end, from reproducible Nix dev shells and a Dockerised local stack to what Prometheus, Grafana and Metabase show after deploy.</li>
@@ -308,6 +308,8 @@
               <span class="badge">WebAuthn</span>
               <span class="badge">Docker</span>
               <span class="badge">Nix</span>
+              <span class="badge">Headscale</span>
+              <span class="badge">Caddy</span>
             </div>
           </div>
 
@@ -786,6 +788,8 @@
               <li>Bazel / Bun</li>
               <li>Terraform / GitOps</li>
               <li>SPIFFE / SPIRE / Vault</li>
+              <li>Headscale / Tailscale (self-hosted mesh VPN)</li>
+              <li>Caddy (edge, private, egress, mesh)</li>
               <li>Falco / Open Policy Agent</li>
               <li>Prometheus / Grafana</li>
               <li>GitLab CI / CircleCI</li>
