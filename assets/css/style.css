@@ -496,11 +496,6 @@ hr.divider {
   }
   .badge:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
 
-  /* Secondary projects keep their name and stack, and drop the prose. */
-  .print-brief .item-list,
-  .print-brief .item-desc { display: none; }
-  .print-brief { margin-bottom: .5rem; break-inside: avoid; page-break-inside: avoid; }
-
   .print-inline .item-meta { display: none; }
   .print-inline .item-list li { display: inline; margin: 0; padding: 0; }
   .print-inline .item-list li::before { display: none; }
