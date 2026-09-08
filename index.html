@@ -89,7 +89,7 @@
             systems and applied cryptography. Currently Co-Founder &amp; CTO at
             <a href="https://www.0xequity.com" target="_blank" rel="noopener">0xEquity</a>,
             where I built and run the platform end to end: a NestJS backend of some
-            fifty domain modules, a React&nbsp;19 dApp, a Go agentic execution stack, and the
+            fifty domain modules, a React dApp, a Go agentic execution stack, and the
             zero-trust infrastructure all three sit on.
           </p>
           <p class="item-desc">
@@ -101,6 +101,35 @@
 
         <section class="work-section">
           <h2 class="section-heading">Experience</h2>
+
+          <div class="item">
+            <div class="item-heading">
+              <h3 class="item-title">Head of Department, Digital Assets and Blockchain Technologies</h3>
+              <span class="item-meta">AKS&#304;S Uluslararas&#305; Ba&#287;&#305;ms&#305;z Denetim A.&#350;. &nbsp;|&nbsp; Istanbul &nbsp;|&nbsp; 2026 &ndash; Present</span>
+            </div>
+            <p class="item-desc">
+              Head of the digital assets practice at an independent audit firm authorised by
+              Turkey's KGK, the Capital Markets Board (SPK) and the banking regulator (BDDK).
+              Turkey's 2024 crypto-asset law and the CMB's 2025 communiqu&eacute;s require every
+              crypto-asset service provider to commission an annual independent information
+              systems audit from a CMB-authorised firm, which is the regime this practice
+              works inside.
+            </p>
+            <ul class="item-list">
+              <li>Led the team that built the firm's proof-of-reserve system: address discovery, multi-chain balance aggregation and reserve verification across more than 200,000 addresses on over 100 blockchains.</li>
+              <li>Ran the Bybit engagement, a compliance audit covering 2025 activity.</li>
+              <li>Brought the firm's group audit methodology (ISA 600 scoping, component auditor instructions, independence confirmations and engagement partner sign-off) to bear on digital asset engagements.</li>
+              <li>Translate on-chain evidence into assurance work that a regulator and an audit committee can both read.</li>
+            </ul>
+            <div class="badge-list">
+              <span class="badge">Proof of reserve</span>
+              <span class="badge">CASP audit</span>
+              <span class="badge">SPK / CMB</span>
+              <span class="badge">ISA 600</span>
+              <span class="badge">Multi-chain</span>
+              <span class="badge">AML</span>
+            </div>
+          </div>
 
           <div class="item">
             <div class="item-heading">
@@ -137,19 +166,20 @@
               <span class="item-meta">0xEquity US, Inc. &nbsp;|&nbsp; Remote &nbsp;|&nbsp; Nov 2022 &ndash; Present</span>
             </div>
             <ul class="item-list">
-              <li>Founded and built the engineering side of a real-world-asset tokenisation platform: tokenised real estate and equities, traded and used as collateral across Base, Arbitrum, Ethereum and Unit0.</li>
+              <li>Founded and built the engineering side of a real-world-asset tokenisation platform for tokenised real estate and equities, live on Base with Arbitrum in rollout.</li>
               <li>Wrote and maintain the NestJS/TypeScript backend: roughly fifty domain modules covering KYC/AML, orders, trades, a match-settlement engine, holdings, rewards, fiat on/off-ramp, campaigns and relayed on-chain transfers.</li>
               <li>Designed the platform's zero-trust infrastructure: SPIFFE/SPIRE workload identity issuing mTLS to every service, HashiCorp Vault for secrets and signing keys, Falco for runtime detection, and immudb as a tamper-evident audit ledger.</li>
               <li>Moved long-running, externally-settled operations onto Temporal, so cross-chain bridge steps, unfilled limit orders and transactions needing fee bumps survive restarts instead of being lost mid-flight.</li>
               <li>Built authentication around passkeys and OPAQUE rather than transmitted passwords, with Casbin policy for authorisation and TOTP as a second factor.</li>
-              <li>Built the React&nbsp;19 dApp on wagmi/viem (trading, portfolio, lending and a pro order ticket) with a swap router that reports real price impact rather than an unmeasured zero.</li>
+              <li>Built the React dApp on wagmi/viem (trading, portfolio, lending and a pro order ticket) with a swap router that reports real price impact rather than an unmeasured zero.</li>
+              <li>Shipped the React Native mobile app on both iOS and Android, from passkey sign-up and KYC through fiat on-ramp, trading and rent claims, and took it through App Store and Play review.</li>
               <li>Run the whole delivery loop solo: reproducible Nix dev shells, a Dockerised local stack, CI, and Prometheus/Grafana/Metabase for what happens after deploy.</li>
             </ul>
             <div class="badge-list">
               <span class="badge">NestJS</span>
               <span class="badge">TypeScript</span>
               <span class="badge">Go</span>
-              <span class="badge">React 19</span>
+              <span class="badge">React</span>
               <span class="badge">Temporal</span>
               <span class="badge">PostgreSQL</span>
               <span class="badge">SPIFFE/SPIRE</span>
@@ -226,31 +256,6 @@
 
           <div class="item">
             <div class="item-heading">
-              <h3 class="item-title">Senior .NET Developer / Project Lead</h3>
-              <span class="item-meta">Zigron (Pvt) Ltd. &nbsp;|&nbsp; Islamabad &nbsp;|&nbsp; Mar 2016 &ndash; May 2016</span>
-            </div>
-            <!-- TODO(Asim): 2-3 bullets -->
-            <div class="badge-list">
-              <span class="badge">.NET</span>
-              <span class="badge">C#</span>
-              <span class="badge">SQL Server</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-heading">
-              <h3 class="item-title">.NET Developer</h3>
-              <span class="item-meta">Defence Housing Authority &nbsp;|&nbsp; Islamabad &nbsp;|&nbsp; Dec 2015 &ndash; Mar 2016</span>
-            </div>
-            <!-- TODO(Asim): 2-3 bullets -->
-            <div class="badge-list">
-              <span class="badge">.NET</span>
-              <span class="badge">C#</span>
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="item-heading">
               <h3 class="item-title">Freelance Developer</h3>
               <span class="item-meta">Freelancer.com &nbsp;|&nbsp; Islamabad &nbsp;|&nbsp; 2012 &ndash; Mar 2017</span>
             </div>
@@ -284,20 +289,19 @@
             <p class="item-desc">
               A platform for investing in tokenised real-world assets (property and
               equities) and putting them to work on-chain. Fractional positions from
-              small tickets, rental yield paid on-chain, and holdings usable as collateral
-              while they keep earning.
+              small tickets and rental income paid on-chain.
             </p>
             <ul class="item-list">
               <li>NestJS backend of ~50 domain modules, from KYC and document signing through orders, settlement, holdings and rewards.</li>
-              <li>Multi-chain across Base, Arbitrum, Ethereum and Unit0, with an RPC proxy that spends a read's retries on different providers rather than failing on one.</li>
+              <li>Live on Base with Arbitrum in rollout, behind an RPC proxy that spends a read's retries across different providers rather than failing on one.</li>
               <li>Zero-trust service mesh: SPIRE-issued SPIFFE identities, mTLS between every service, Vault-held signing keys, immudb audit ledger, Falco runtime detection.</li>
               <li>Durable Temporal workflows for anything that settles outside a request: bridge legs, resting orders, transaction bumps.</li>
-              <li>React 19 dApp on wagmi/viem with RainbowKit, TanStack Query, Zustand and i18n.</li>
+              <li>React dApp on wagmi/viem with RainbowKit, TanStack Query, Zustand and i18n.</li>
             </ul>
             <div class="badge-list">
               <span class="badge">NestJS</span>
               <span class="badge">TypeScript</span>
-              <span class="badge">React 19</span>
+              <span class="badge">React</span>
               <span class="badge">wagmi/viem</span>
               <span class="badge">Temporal</span>
               <span class="badge">PostgreSQL</span>
@@ -314,6 +318,35 @@
               <span class="badge">WebAuthn</span>
               <span class="badge">Docker</span>
               <span class="badge">Nix</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-heading">
+              <h3 class="item-title">0xEquity mobile app (iOS and Android)</h3>
+              <span class="item-meta">React Native &nbsp;|&nbsp; shipped to the App Store and Play</span>
+            </div>
+            <p class="item-desc">
+              The mobile client for the platform: passkey sign-up, KYC, a smart-contract wallet
+              deployed at first transaction, fiat on-ramp, property trading and rent claims,
+              gasless throughout because signed transactions go to a relayer that pays the gas.
+            </p>
+            <ul class="item-list">
+              <li>React Native with Expo, one codebase across both platforms, with native release pipelines through Fastlane and EAS.</li>
+              <li>WebAuthn passkeys and biometric keychain for sign-in, social recovery through three trusted guardians, and device attestation via Play Integrity and App Attest.</li>
+              <li>Took the app through Apple review against the guidelines that govern financial and crypto products: 3.1.5(a)(iii) on cryptocurrency, 3.1.5(a)(iv) on exchanges and 3.2.1(viii) on facilitating trades.</li>
+            </ul>
+            <div class="badge-list">
+              <span class="badge">React Native</span>
+              <span class="badge">Expo</span>
+              <span class="badge">TypeScript</span>
+              <span class="badge">viem</span>
+              <span class="badge">WebAuthn</span>
+              <span class="badge">TanStack Query</span>
+              <span class="badge">Fastlane</span>
+              <span class="badge">EAS</span>
+              <span class="badge">Maestro</span>
+              <span class="badge">Sentry</span>
             </div>
           </div>
 
@@ -393,7 +426,7 @@
               <code>snarkjs groth16 setup</code> producing byte-identical output.
             </p>
             <ul class="item-list">
-              <li>20&ndash;60&times; faster than snarkjs: a ~2M-constraint circuit drops from over an hour to about three minutes on eight cores.</li>
+              <li>A ~2M-constraint circuit completes in about three minutes on eight cores, against a snarkjs baseline still unfinished when it was stopped at fourteen minutes.</li>
               <li>Accumulates weighted curve points by scatter-add across Rayon threads, rather than running a separate MSM per signal.</li>
               <li>Computes missing Lagrange-basis points by parallel IFFT, so unprepared ptau files work without a separate preparation pass.</li>
             </ul>
@@ -712,6 +745,7 @@
             <h3 class="skills-subheading">Frontend</h3>
             <ul class="plain-list">
               <li>React / Next.js</li>
+              <li>React Native / Expo (iOS, Android)</li>
               <li>wagmi / viem / RainbowKit</li>
               <li>TanStack Query / Zustand</li>
               <li>Tailwind CSS</li>
@@ -738,6 +772,7 @@
               <li>DeFi: AMMs, lending, flash loans</li>
               <li>Cross-chain bridging (CCTP)</li>
               <li>RWA tokenisation</li>
+              <li>Proof of reserve</li>
             </ul>
           </div>
 
