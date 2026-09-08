@@ -280,14 +280,6 @@ hr.divider {
 .stacked-list .secondary { display: block; }
 .stacked-list .tertiary  { display: block; color: var(--muted); }
 
-.quote {
-  margin: 0;
-  padding-left: 1rem;
-  border-left: 3px solid var(--accent);
-  font-size: 13px;
-  font-style: italic;
-  line-height: 1.6;
-}
 
 /* --------------------------------------------------------------------------
    Footer
@@ -538,7 +530,6 @@ hr.divider {
   .aside-section > .plain-list li { display: inline; font-size: 10px; }
   .aside-section > .plain-list li:not(:last-child)::after { content: "  \00B7  "; color: #b8b8b8; }
 
-  .quote { font-size: 10px; padding-left: .6rem; }
 
   /* ---- footer ---- */
 
