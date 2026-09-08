@@ -31,7 +31,14 @@
       <div class="col-main">
         <h1 class="name">Asim Ashfaq</h1>
         <p class="tagline">Co-Founder &amp; CTO&ensp;|&ensp;Full Stack&ensp;|&ensp;Distributed Systems &amp; Cryptography</p>
-        <a class="btn-download no-print" href="assets/files/asim-ashfaq-resume.pdf" download>Download CV</a>
+        <div class="header-actions no-print">
+          <a class="btn-download" href="assets/files/asim-ashfaq-resume.pdf" download>Download CV</a>
+          <div class="text-size" role="group" aria-label="Text size">
+            <button type="button" id="text-smaller" aria-label="Decrease text size">A&minus;</button>
+            <button type="button" id="text-reset" aria-label="Reset text size">Reset</button>
+            <button type="button" id="text-larger" aria-label="Increase text size">A+</button>
+          </div>
+        </div>
       </div>
 
       <div class="col-aside">
@@ -458,7 +465,7 @@
 
           <div class="item print-brief">
             <div class="item-heading">
-              <h3 class="item-title">indexer-core</h3>
+              <h3 class="item-title">Indexer-core</h3>
               <span class="item-meta">TypeScript / Bun &nbsp;|&nbsp; Bazel</span>
             </div>
             <p class="item-desc">
@@ -854,6 +861,41 @@
   </footer>
 
 </article>
+
+<script>
+(function () {
+  var wrap = document.querySelector('.resume-wrapper');
+  var KEY = 'cv-text-scale', MIN = 0.85, MAX = 1.5, STEP = 0.1, DEFAULT = 1;
+  var scale = DEFAULT;
+
+  // Storage can throw outright in a private window or with site data blocked,
+  // so every read and write is guarded and the page renders fine without it.
+  try {
+    var saved = parseFloat(localStorage.getItem(KEY));
+    if (saved >= MIN && saved <= MAX) scale = saved;
+  } catch (e) {}
+
+  function apply() {
+    // `zoom` rather than `transform: scale`, because zoom reflows the text
+    // instead of scaling a fixed-size box and overflowing the viewport.
+    wrap.style.zoom = scale === DEFAULT ? '' : scale;
+    try { localStorage.setItem(KEY, String(scale)); } catch (e) {}
+    document.getElementById('text-smaller').disabled = scale <= MIN + 0.001;
+    document.getElementById('text-larger').disabled = scale >= MAX - 0.001;
+  }
+
+  function nudge(by) {
+    scale = Math.min(MAX, Math.max(MIN, Math.round((scale + by) * 100) / 100));
+    apply();
+  }
+
+  document.getElementById('text-smaller').addEventListener('click', function () { nudge(-STEP); });
+  document.getElementById('text-larger').addEventListener('click', function () { nudge(STEP); });
+  document.getElementById('text-reset').addEventListener('click', function () { scale = DEFAULT; apply(); });
+
+  apply();
+})();
+</script>
 
 </body>
 </html>
