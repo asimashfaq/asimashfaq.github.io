@@ -511,7 +511,10 @@ hr.divider {
     page-break-inside: avoid;
   }
   .skills-subheading {
-    flex: 0 0 95px;
+    /* Wide enough for the longest label ("Compliance & Assurance"). Too narrow
+       and it wraps mid-heading, which interleaves the two halves with the
+       content beside it and reads as a broken table. */
+    flex: 0 0 122px;
     margin: 0;
     font-size: 10px;
     line-height: 1.5;
