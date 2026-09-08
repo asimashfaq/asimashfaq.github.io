@@ -108,9 +108,9 @@ python3 -m http.server 8000 &
 **Netlify / Vercel / Cloudflare Pages**: drag the folder in, or point it at the
 repo. Build command: none. Publish directory: `/`.
 
-## Credit
+## Design lineage
 
-The layout follows the [DevResume](http://themes.3rdwavemedia.com) design by
-Xiaoying Riley, released under CC BY 3.0. The stylesheet here is written from
-scratch (no Bootstrap, no Font Awesome), but the attribution stays in the footer
-per that licence.
+The visual language (green accent, uppercase letterspaced headings with a left
+rule, white card on a light ground) was modelled on the DevResume template by
+Xiaoying Riley. No code from it is used here: the stylesheet is written from
+scratch, with no Bootstrap and no Font Awesome, and the icons are inline SVG.
