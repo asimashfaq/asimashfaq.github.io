@@ -1,0 +1,455 @@
+/* ==========================================================================
+   Asim Ashfaq — Resume
+   Design language after "DevResume" by Xiaoying Riley (3rd Wave Media),
+   released under CC BY 3.0. Stylesheet written from scratch, no framework.
+   ========================================================================== */
+
+:root {
+  --accent:        #54b689;
+  --accent-dark:   #3f9c72;
+  --text:          #4f4f4f;
+  --heading:       #292929;
+  --muted:         #8a8a8a;
+  --rule:          rgba(0, 0, 0, .1);
+  --page-bg:       #f4f6f5;
+  --card-bg:       #ffffff;
+  --card-shadow:   0 16px 48px 0 rgba(0, 0, 0, .176);
+
+  --font: "Roboto", -apple-system, "system-ui", "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color .15s ease-in-out;
+}
+a:hover, a:focus-visible { color: var(--accent-dark); text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+p  { margin: 0 0 .75rem; }
+p:last-child { margin-bottom: 0; }
+
+/* --------------------------------------------------------------------------
+   Card
+   -------------------------------------------------------------------------- */
+
+.resume-wrapper {
+  max-width: 1044px;
+  margin: 48px auto;
+  padding: 48px;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, .024);
+  box-shadow: var(--card-shadow);
+}
+
+hr.divider {
+  height: 0;
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   Layout — 75 / 25 split, stacks under 992px
+   -------------------------------------------------------------------------- */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 0 -15px;
+}
+.row.align-center { align-items: center; }
+
+.col-main  { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
+.col-aside { flex: 0 0 100%; max-width: 100%; padding: 0 15px; }
+
+@media (min-width: 992px) {
+  .col-main  { flex: 0 0 75%; max-width: 75%; padding-right: 3rem; }
+  .col-aside { flex: 0 0 25%; max-width: 25%; padding: 0 1.5rem 1.5rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+
+.name {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: .4em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.tagline {
+  margin: .25rem 0 0;
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--heading);
+}
+
+.contact-list { font-size: 14px; }
+.contact-list li {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: .35rem;
+  overflow-wrap: anywhere;
+}
+.contact-list li:last-child { margin-bottom: 0; }
+.contact-list .icon {
+  flex: 0 0 auto;
+  width: 1.15em;
+  margin-right: .5rem;
+  color: var(--accent);
+  text-align: center;
+  vertical-align: -.125em;
+}
+.contact-list a { color: var(--text); }
+.contact-list a:hover { color: var(--accent); }
+
+@media (max-width: 991.98px) {
+  .contact-list { margin-top: 1.25rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Section headings
+   -------------------------------------------------------------------------- */
+
+.work-section { padding: 1rem 0; }
+
+.section-heading {
+  position: relative;
+  margin: 0 0 1.5rem;
+  padding-left: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: .133em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.section-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   Items (jobs, projects, education …)
+   -------------------------------------------------------------------------- */
+
+.item { margin-bottom: 2rem; }
+.item:last-child { margin-bottom: 0; }
+
+/* Title and meta stack, rather than sitting at opposite edges of the column.
+   Right-aligning the meta opened a gulf across the row that read as a mistake
+   on any entry whose title was short. */
+.item-heading { margin-bottom: .5rem; }
+
+.item-title {
+  margin: 0 0 .15rem;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--heading);
+}
+
+.item-meta {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.item-desc { margin-bottom: .5rem; font-size: 13px; }
+
+.item-list li {
+  position: relative;
+  margin-bottom: .5rem;
+  padding-left: 1rem;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.item-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.item-list li:last-child { margin-bottom: 0; }
+
+.item-link {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.item-desc code {
+  padding: .1em .3em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .9em;
+  background: rgba(84, 182, 137, .12);
+  border-radius: 3px;
+}
+
+.item-list strong { color: var(--heading); font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   Tech badges
+   -------------------------------------------------------------------------- */
+
+.badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .75rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: .3rem .5rem;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Aside
+   -------------------------------------------------------------------------- */
+
+.aside-section { margin-bottom: 2rem; }
+.aside-section:last-child { margin-bottom: 0; }
+
+.skills-group { margin-bottom: 1.25rem; }
+.skills-group:last-child { margin-bottom: 0; }
+.skills-subheading {
+  margin: 0 0 .5rem;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--heading);
+}
+
+.plain-list li {
+  margin-bottom: .4rem;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.plain-list li:last-child { margin-bottom: 0; }
+
+.stacked-list li { margin-bottom: 1rem; font-size: 12px; }
+.stacked-list li:last-child { margin-bottom: 0; }
+.stacked-list .primary {
+  display: block;
+  font-weight: 700;
+  color: var(--heading);
+}
+.stacked-list .secondary { display: block; }
+.stacked-list .tertiary  { display: block; color: var(--muted); }
+
+.quote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.resume-footer { text-align: center; }
+
+.social-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .5rem 1.5rem;
+  font-size: 13px;
+}
+.social-list a { color: var(--text); }
+.social-list a:hover { color: var(--accent); }
+.social-list .icon { margin-right: .4rem; color: var(--accent); vertical-align: -.125em; }
+
+.credit {
+  margin-top: 1.25rem;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   Download button
+   -------------------------------------------------------------------------- */
+
+.btn-download {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .5rem .9rem;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: background-color .15s ease-in-out;
+}
+.btn-download:hover, .btn-download:focus-visible {
+  color: #fff;
+  background: var(--accent-dark);
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Small screens
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 767.98px) {
+  .resume-wrapper { margin: 0; padding: 2rem 1.25rem; box-shadow: none; border: 0; }
+  body { background: var(--card-bg); }
+  .name { font-size: 30px; letter-spacing: .25em; }
+  .tagline { font-size: 16px; }
+}
+
+/* --------------------------------------------------------------------------
+   Print — Cmd/Ctrl+P produces a clean PDF
+   -------------------------------------------------------------------------- */
+
+@media print {
+  @page { size: A4; margin: 10mm 12mm; }
+
+  body { background: #fff; font-size: 11px; }
+
+  .resume-wrapper {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .no-print { display: none !important; }
+
+  /* The print viewport is narrower than the 992px breakpoint, so the two-column
+     layout has to be restated here or the whole CV stacks into one long column. */
+  /* Floats, not flex. A flex container will not fragment across printed pages in
+     Chrome: it jumps whole to the next page, which left page one holding nothing
+     but the header. Floated columns break across pages properly. */
+  .row { display: block; margin: 0; }
+  .row::after { content: ""; display: table; clear: both; }
+  .col-main  { float: left;  width: 70%; max-width: none; padding: 0 20px 0 0; }
+  .col-aside { float: right; width: 30%; max-width: none; padding: 0; }
+
+  .work-section { padding: .4rem 0; }
+  .section-heading { margin-bottom: .6rem; }
+  .item { margin-bottom: .7rem; }
+  .item-list li, .plain-list li { margin-bottom: .15rem; }
+  .stacked-list li { margin-bottom: .5rem; }
+  .skills-group { margin-bottom: .6rem; }
+  .aside-section { margin-bottom: .9rem; }
+  .badge-list { gap: .25rem; margin-top: .35rem; }
+  hr.divider { margin: .25rem 0; }
+  .resume-footer { margin-top: 0; break-before: avoid; page-break-before: avoid; }
+  .social-list { font-size: 9px; gap: .2rem .9rem; }
+  .credit { margin-top: .25rem; font-size: 8px; }
+  .item { margin-bottom: .38rem; }
+  .item-list li, .plain-list li, .stacked-list li { line-height: 1.35; }
+
+  .name { font-size: 30px; }
+  .tagline { font-size: 14px; }
+  .section-heading { font-size: 14px; }
+  .item-title { font-size: 13px; }
+  .item-list li, .plain-list li, .stacked-list li { font-size: 10px; }
+
+  .badge {
+    color: var(--accent) !important;
+    background: transparent !important;
+    border: 1px solid var(--accent);
+    padding: .15rem .35rem;
+  }
+
+  /* The web page carries the full detail; the printed CV is a summary, so the
+     secondary projects keep their title, description and stack and drop the
+     bullets. Aiming at four pages, not at saying everything twice. */
+  .print-brief .item-list,
+  .print-brief .item-desc { display: none; }
+
+  /* A brief entry is a name and a stack. Rendering that stack as chunky pills
+     costs two wrapped rows per project; as dense inline text it costs one. */
+  .print-brief .badge-list { display: block; margin-top: .1rem; }
+  .print-brief .badge {
+    display: inline;
+    padding: 0;
+    font-size: 8.5px;
+    font-weight: 400;
+    color: var(--muted);
+    background: transparent !important;
+    border: 0 !important;
+  }
+  .print-brief .badge:not(:last-child)::after { content: " \00B7 "; }
+
+  /* The last block is a list of small things; inline it so four lines become two. */
+  .print-inline .item-meta { display: none; }
+  .print-inline .item-heading { margin-bottom: .1rem; }
+  .print-inline .item-list li { display: inline; margin: 0; padding: 0; }
+  .print-inline .item-list li::before { display: none; }
+  .print-inline .item-list li:not(:last-child)::after { content: " \00B7 "; color: var(--muted); }
+
+  .item-desc { font-size: 9.5px; margin-bottom: .22rem; line-height: 1.4; }
+  .item-list li, .plain-list li, .stacked-list li { font-size: 9px; line-height: 1.35; margin-bottom: .06rem; }
+  .badge { font-size: 8px; padding: .12rem .3rem; }
+  .badge-list { gap: .2rem; margin-top: .25rem; }
+  .item { margin-bottom: .45rem; }
+  .work-section { padding: .25rem 0; }
+  .section-heading { margin-bottom: .35rem; font-size: 13px; }
+  .skills-group { margin-bottom: .45rem; }
+  .aside-section { margin-bottom: .7rem; }
+  .stacked-list li { margin-bottom: .35rem; }
+  .item-heading { margin-bottom: .25rem; }
+  .item-title { font-size: 12px; }
+  .item-meta { font-size: 9.5px; }
+  .quote { font-size: 10px; }
+
+  /* Only the small blocks avoid breaking. A whole section is taller than a page,
+     so asking it not to break forces a break BEFORE it and then overflows anyway,
+     which is what left one page holding nothing but the header. */
+  .item, .aside-section, .skills-group { break-inside: avoid; page-break-inside: avoid; }
+  .section-heading { break-after: avoid; page-break-after: avoid; }
+
+  a { color: var(--text); text-decoration: none; }
+}

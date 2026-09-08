@@ -1,0 +1,5 @@
+.DS_Store
+.playwright-mcp/
+
+# The original source resume contains a home street address. Never publish it.
+Asim - Resume (3).pdf
