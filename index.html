@@ -146,6 +146,7 @@
               <li>Built the compliance path for a Regulation S offering: a server-side non-US-person determination under Rule 902(k), versioned and evidenced, anchored to a tamper-evident ledger before the decision is stored, with W-8BEN treaty withholding resolved across thirty jurisdictions server-side rather than taken from the client.</li>
               <li>Wrote and maintain the NestJS backend, roughly fifty domain modules from KYC and AML through orders, settlement, holdings, rewards and fiat rails, with anything that settles outside a request moved onto Temporal so bridge legs and resting orders survive a restart.</li>
               <li>Designed the zero-trust infrastructure: SPIFFE/SPIRE identity and mTLS between services, Vault for secrets and signing keys, Falco runtime detection, immudb as the audit ledger, a self-hosted Headscale mesh carrying the private surfaces instead of the public internet, and authentication on passkeys and OPAQUE rather than transmitted passwords.</li>
+              <li>Shipped signed, reproducible releases end to end: every release passes a gate (build, tests, govulncheck, osv-scanner, shellcheck) and is signed on a hardware key, and production rebuilds the images itself and refuses any whose digest differs from the signed one. Services run in gVisor sandboxes behind MFA-only, permission-bounded cloud access.</li>
               <li>Shipped both clients: a React dApp on wagmi/viem, and a React Native app on iOS and Android taken through App Store and Play review, covering passkey sign-up and KYC through fiat on-ramp, trading and rent claims.</li>
               <li>Started DeFiLoops, the platform's agentic execution layer: a Go stack on durable workflows where an MCP server lets a language model author and run strategies under an agent key that is spend-capped, revocable across a chain in one transaction, and has no field for a destination or raw calldata.</li>
               <li>Run the delivery loop end to end, from reproducible Nix dev shells and a Dockerised local stack to what Prometheus, Grafana and Metabase show after deploy.</li>
@@ -360,6 +361,9 @@
               <li>Steps that belong together are merged into one transaction, so an approval cannot outlive the step it was granted for; a step can spend what the previous step produced.</li>
               <li>Atomic loan migration via flash loan: a deadlock by hand, one instruction here, with the borrowed funds never touching the user's account.</li>
               <li>Key model enforced on-chain rather than by policy: the agent key signs typed adapter parameters with no field for a destination or raw calldata, is capped by a spend limit it cannot raise, and is revocable for every account on a chain in one transaction.</li>
+              <li>Moved the agent's signing key into an AWS Nitro Enclave: the key is generated and sealed inside, KMS releases it only to an attested, pinned enclave image, and services reach it over attested TLS. Enclave builds are reproducible, so anyone can rebuild the image and get the same measurement, and new images roll out with no downtime: the new host must unseal the key before the old one retires.</li>
+              <li>Relayer signing keys moved to AWS KMS, and every hot key the servers once held retired and crypto-shredded.</li>
+              <li>Enclave-side controls rolling out behind switches: an oracle-bound price check on every trade, an owner-approval check that verifies a passkey-certified browser session key before signing (with standing grants for automations that fire many times), and a write-ahead audit log in S3 Object Lock with an on-chain gap checker that alerts on any signature missing from the log.</li>
               <li>Own swap router answering questions an aggregator cannot: what fills at a named limit price, and how much a resting order takes right now.</li>
               <li>Durable runs on Temporal, plus schedules, price triggers and plan chaining that rebuild and re-price the plan each time they fire.</li>
               <li>Foundry invariant tests for the adversarial cases: agent blast radius, guard drain, proxy squatting, address parity.</li>
@@ -375,6 +379,8 @@
               <span class="badge">Uniswap v3</span>
               <span class="badge">Aave</span>
               <span class="badge">CCTP</span>
+              <span class="badge">AWS Nitro Enclaves</span>
+              <span class="badge">AWS KMS</span>
             </div>
           </div>
 
@@ -694,6 +700,9 @@
               <li>Tilt / kind</li>
               <li>Prometheus / Grafana</li>
               <li>GitLab CI / CircleCI</li>
+              <li>AWS Nitro Enclaves / attested KMS</li>
+              <li>gVisor</li>
+              <li>Sigstore cosign / SBOM / reproducible builds</li>
             </ul>
           </div>
           <div class="skills-group">
@@ -703,6 +712,17 @@
               <li>Circom circuits</li>
               <li>WebAuthn / passkeys</li>
               <li>OPAQUE / BLS signatures</li>
+              <li>Remote attestation / RA-TLS</li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <h3 class="skills-subheading">Security engineering</h3>
+            <ul class="plain-list">
+              <li>TEE key custody</li>
+              <li>Zero-downtime enclave rollouts</li>
+              <li>Supply-chain security (signed, reproducible releases)</li>
+              <li>Mutation testing of security controls</li>
             </ul>
           </div>
 
